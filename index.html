@@ -12,12 +12,22 @@
   border-radius: 100px;
   -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
 }
-  video {
+  #circle-video {
     width: 400px;
     height: 400px;
     top: -100px;
     left: -100px;
     position: absolute;
+    -webkit-transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -ms-transform:  scaleX(-1);
+    -o-transform:  scaleX(-1);
+    transform: scaleX(-1);
+  }
+
+  #square-video {
+    width: 400px;
+    height: 400px;
     -webkit-transform: scaleX(-1);
     -moz-transform: scaleX(-1);
     -ms-transform:  scaleX(-1);
@@ -30,22 +40,29 @@
 <body>
 <div class="web-cam">
 
-  <video autoplay></video>
+  <video id="circle-video" autoplay></video>
 
+</div>
+
+<div>
+<video id="square-video" autoplay></video>
 </div>
 
 <script type="text/javascript">
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
 var constraints = {audio: false, video: true};
-var video = document.querySelector("video");
+var video = document.querySelector("#circle-video");
+var sqvid = document.querySelector("#square-video");
 
 function successCallback(stream) {
   window.stream = stream; // stream available to console
   if (window.URL) {
     video.src = window.URL.createObjectURL(stream);
+    sqvid.src = window.URL.createObjectURL(stream);
   } else {
     video.src = stream;
+    sqvid.src = stream;
   }
 }
 

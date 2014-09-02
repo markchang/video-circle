@@ -6,8 +6,29 @@
 <title>getUserMedia</title>
 <style>
 @media {
-  video {
-    width: 800px;
+  .circle-300 {
+    width: 300px;
+    height: 300px;
+    border-radius: 150px;
+    -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
+  }
+
+  #circle-video-600 {
+    width: 600px;
+    height: 600px;
+    top: -150px;
+    left: -150px;
+    position: absolute;
+    -webkit-transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -ms-transform:  scaleX(-1);
+    -o-transform:  scaleX(-1);
+    transform: scaleX(-1);
+  }
+
+  #square-video {
+    width: 400px;
+    height: 400px;
     -webkit-transform: scaleX(-1);
     -moz-transform: scaleX(-1);
     -ms-transform:  scaleX(-1);
@@ -18,24 +39,28 @@
 </style>
 </head>
 <body>
-<div class="web-cam">
 
-  <video autoplay></video>
+<div class="circle-300">
+  <video id="circle-video-600" autoplay></video>
+</div>
 
+<div>
+  <video id="square-video" autoplay></video>
 </div>
 
 <script type="text/javascript">
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
 var constraints = {audio: false, video: true};
-var video = document.querySelector("video");
+var video600 = document.querySelector("#circle-video-600");
+var sqvid = document.querySelector("#square-video");
 
 function successCallback(stream) {
   window.stream = stream; // stream available to console
   if (window.URL) {
-    video.src = window.URL.createObjectURL(stream);
+    video600.src = sqvid.src = window.URL.createObjectURL(stream);
   } else {
-    video.src = stream;
+    video600.src = sqvid.src = stream;
   }
 }
 

@@ -7,9 +7,9 @@
 <style>
 @media {
   .circle-mask {
-    width: 350px;
-    height: 350px;
-    border-radius: 200px;
+    width: 300px;
+    height: 300px;
+    border-radius: 150px;
     -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
   }
 
@@ -52,14 +52,16 @@ navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia 
 
 var constraints = {audio: false, video: true};
 var video = document.querySelector("#circle-video");
-var sqvid = document.querySelector("#square-video");
+// var sqvid = document.querySelector("#square-video");
 
 function successCallback(stream) {
   window.stream = stream; // stream available to console
   if (window.URL) {
-    video.src = sqvid.src = window.URL.createObjectURL(stream);
+    video.src = window.URL.createObjectURL(stream);
+    // sqvid.src = video.src;
   } else {
-    video.src = sqvid.src = stream;
+    video.src = stream;
+    // sqvid.src = stream;
   }
 }
 
